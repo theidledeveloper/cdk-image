@@ -1,0 +1,14 @@
+ARG ALPINE_VERSION
+
+FROM node:${ALPINE_VERSION}
+LABEL maintainer="theidledeveloper@gmail.com"
+
+ARG CDK_VERSION
+
+RUN apk --update-cache --no-cache --update add \
+      git && \
+    npm install -g aws-cdk@${CDK_VERSION}
+
+WORKDIR /opt/app
+
+CMD ["cdk", "--version"]

@@ -1,0 +1,16 @@
+ARG DEBIAN_VERSION
+
+FROM node:${DEBIAN_VERSION}
+LABEL maintainer="theidledeveloper@gmail.com"
+
+ARG CDK_VERSION
+
+RUN apt-get update -qq && \
+    apt-get install -qq -y \
+      git &&\
+    npm install -g aws-cdk@${CDK_VERSION} && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /opt/app
+
+CMD ["cdk", "--version"]
